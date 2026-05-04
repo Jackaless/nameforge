@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Name Generator — Fantasy, Baby, Business, D&D & More</title>
+<meta name="description" content="Generate random names instantly for any purpose. Fantasy characters, D&D heroes, baby names by origin, business names, team names, and more. Free, no sign-up needed.">
+<meta name="keywords" content="random name generator, fantasy name generator, DnD name generator, baby name generator, business name generator, character name generator, random name picker">
+<meta property="og:title" content="Random Name Generator — 8 Categories, Unlimited Names">
+<meta property="og:description" content="Generate names for fantasy characters, D&D campaigns, babies, businesses, teams and more. Instant, free, no sign-up.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ═══════════════════════════════════════════════════════════
+     GOOGLE ADSENSE — replace ca-pub-XXXXXXXXXXXXXXXX with your
+     Publisher ID from adsense.google.com after approval
+     ═══════════════════════════════════════════════════════════ -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0e0c;
+    --bg-2: #1a1915;
+    --bg-3: #242219;
+    --border: rgba(255,255,255,0.08);
+    --border-2: rgba(255,255,255,0.15);
+    --text: #f0ece2;
+    --text-2: #a09880;
+    --text-3: #5a5545;
+    --gold: #d4a843;
+    --gold-dim: rgba(212,168,67,0.15);
+    --gold-dim2: rgba(212,168,67,0.08);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Plus Jakarta Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --r: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Star-field background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 65%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 40%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 50%, rgba(255,255,255,0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 20px 100px; }
+
+  /* ── Header ── */
+  header { padding: 56px 0 48px; text-align: center; }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .header-tag::before, .header-tag::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--text-2);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── Category tabs ── */
+  .category-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .cat-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    padding: 7px 16px;
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all .18s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cat-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-dim2);
+  }
+
+  .cat-btn.active {
+    border-color: var(--gold);
+    background: var(--gold-dim);
+    color: var(--gold);
+  }
+
+  .cat-icon { font-size: 13px; }
+
+  /* ── Generator card ── */
+  .gen-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gen-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.6;
+  }
+
+  .gen-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .option-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  select {
+    font-family: var(--sans);
+    font-size: 13px;
+    padding: 7px 12px;
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    background: var(--bg-3);
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+    transition: border-color .15s;
+    appearance: none;
+    padding-right: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235a5545' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+
+  select:focus { border-color: var(--gold); }
+
+  /* ── Results display ── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
+    min-height: 120px;
+  }
+
+  .name-tile {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all .18s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .name-tile:hover {
+    border-color: var(--gold);
+    background: var(--gold-dim2);
+    transform: translateY(-1px);
+  }
+
+  .name-tile.copied {
+    border-color: #4ade80;
+    background: rgba(74,222,128,0.08);
+  }
+
+  .tile-name {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .tile-meaning {
+    font-size: 11px;
+    color: var(--text-3);
+    font-family: var(--mono);
+  }
+
+  .tile-copy-hint {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    margin-top: 2px;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+
+  .name-tile:hover .tile-copy-hint { opacity: 1; }
+
+  /* ── Buttons ── */
+  .btn-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+  .btn-generate {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    padding: 13px 32px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    background: var(--gold-dim);
+    color: var(--gold);
+    cursor: pointer;
+    transition: all .18s;
+    font-weight: 500;
+  }
+
+  .btn-generate:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+
+  .btn-generate:active { transform: scale(0.98); }
+
+  .btn-copy-all {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .btn-copy-all:hover { border-color: var(--border-2); color: var(--text); }
+
+  .count-display {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    margin-left: auto;
+  }
+
+  /* ── Favourites ── */
+  .favourites-bar {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    min-height: 52px;
+  }
+
+  .fav-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    flex-shrink: 0;
+  }
+
+  .fav-chip {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--gold);
+    background: var(--gold-dim2);
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 20px;
+    padding: 3px 12px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .fav-chip:hover { background: rgba(212,168,67,0.25); }
+
+  .fav-empty { font-size: 12px; color: var(--text-3); font-style: italic; font-family: var(--sans); }
+
+  /* ── SEO section ── */
+  .seo-section {
+    margin-top: 80px;
+    padding-top: 56px;
+    border-top: 1px solid var(--border);
+  }
+
+  .seo-section h2 {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .seo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 620px) { .seo-grid { grid-template-columns: 1fr; } }
+
+  .seo-section p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.85;
+    margin-bottom: 14px;
+  }
+
+  .seo-section h3 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 10px;
+    margin-top: 4px;
+  }
+
+  details { border-top: 1px solid var(--border); }
+  details:last-child { border-bottom: 1px solid var(--border); }
+  summary {
+    list-style: none;
+    padding: 16px 0;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    color: var(--text);
+  }
+  summary::after { content: '+'; font-family: var(--mono); color: var(--text-3); font-size: 16px; }
+  details[open] summary::after { transform: rotate(45deg); display: inline-block; }
+  .faq-a { font-size: 14px; color: var(--text-2); padding-bottom: 16px; line-height: 1.75; max-width: 580px; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-brand { color: var(--gold); }
+
+  .ad-slot {
+    border: 1px dashed var(--border);
+    border-radius: var(--r);
+    padding: 20px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+  }
+
+  /* ── Sticky anchor ad ── */
+  .sticky-anchor {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #1a1915;
+    border-top: 1px solid var(--border-2);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 999;
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.4);
+  }
+
+  .sticky-anchor-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    flex-shrink: 0;
+  }
+
+  .sticky-anchor-close {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-3);
+    line-height: 1;
+    padding: 4px;
+  }
+
+  .sticky-anchor-close:hover { color: var(--text); }
+  body.anchor-visible { padding-bottom: 80px; }
+
+  /* ── Affiliate banners ── */
+  .affiliate-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--border-2);
+    border-radius: var(--r);
+    padding: 16px 20px;
+    margin: 24px 0;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .affiliate-banner:hover {
+    border-color: var(--gold);
+    background: var(--gold-dim2);
+    transform: translateY(-1px);
+  }
+
+  .affiliate-banner-icon { font-size: 26px; flex-shrink: 0; }
+  .affiliate-banner-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .affiliate-banner-sub { font-size: 12px; color: var(--text-2); line-height: 1.5; }
+
+  .affiliate-banner-cta {
+    margin-left: auto;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 8px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+
+  .affiliate-banner:hover .affiliate-banner-cta {
+    background: var(--gold);
+    color: var(--bg);
+  }
+
+  .affiliate-disclosure {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+    margin-top: -16px;
+    margin-bottom: 20px;
+  }
+
+  .ad-incontent {
+    border: 1px dashed var(--border);
+    border-radius: var(--r);
+    padding: 20px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    margin: 24px 0;
+    letter-spacing: 0.06em;
+  }
+
+  /* Category-aware affiliate — hidden by default, shown by JS */
+  .affiliate-dnd   { display: none; }
+  .affiliate-baby  { display: none; }
+  .affiliate-biz   { display: none; }
+  .affiliate-gen   { display: none; }
+
+  @keyframes tileIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to { opacity: 1; transform: none; }
+  }
+  .name-tile { animation: tileIn 0.25s ease both; }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .spinning { display: inline-block; animation: spin 0.4s ease; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <p class="header-tag">Free online tool</p>
+    <h1>Random<br><em>Name Generator</em></h1>
+    <p class="header-sub">Generate unique names for any purpose — fantasy worlds, D&D campaigns, new babies, brand names, teams and more.</p>
+  </header>
+
+  <!-- Category tabs -->
+  <div class="category-row" id="cat-row" role="tablist">
+    <button class="cat-btn active" data-cat="fantasy" role="tab" aria-selected="true">
+      <span class="cat-icon">⚔️</span> Fantasy
+    </button>
+    <button class="cat-btn" data-cat="dnd" role="tab">
+      <span class="cat-icon">🎲</span> D&amp;D / RPG
+    </button>
+    <button class="cat-btn" data-cat="baby" role="tab">
+      <span class="cat-icon">✨</span> Baby Names
+    </button>
+    <button class="cat-btn" data-cat="business" role="tab">
+      <span class="cat-icon">💼</span> Business
+    </button>
+    <button class="cat-btn" data-cat="team" role="tab">
+      <span class="cat-icon">🏆</span> Team Names
+    </button>
+    <button class="cat-btn" data-cat="pet" role="tab">
+      <span class="cat-icon">🐾</span> Pet Names
+    </button>
+    <button class="cat-btn" data-cat="scifi" role="tab">
+      <span class="cat-icon">🚀</span> Sci-Fi
+    </button>
+    <button class="cat-btn" data-cat="villain" role="tab">
+      <span class="cat-icon">🌑</span> Villain / Dark
+    </button>
+  </div>
+
+  <!-- Generator card -->
+  <div class="gen-card">
+
+    <div class="gen-options" id="gen-options">
+      <!-- Dynamically populated per category -->
+    </div>
+
+    <div class="results-grid" id="results-grid">
+      <!-- Name tiles rendered here -->
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-generate" id="btn-generate" onclick="generate()">
+        <span id="gen-icon">✦</span> Generate Names
+      </button>
+      <button class="btn-copy-all" onclick="copyAll()">Copy all</button>
+      <span class="count-display" id="count-display"></span>
+    </div>
+  </div>
+
+  <!-- Favourites -->
+  <div class="favourites-bar" id="fav-bar">
+    <span class="fav-label">Saved</span>
+    <span class="fav-empty" id="fav-empty">Click any name to save it here</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       AD SLOT 1 — Below generator, highest RPM position
+       Replace with your AdSense display ad unit code
+       ═══════════════════════════════════════════════════ -->
+  <div class="ad-incontent">
+    Ad unit 1 — 336×280 or responsive rectangle<br>
+    Replace with: &lt;ins class="adsbygoogle"...&gt;
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       CATEGORY-AWARE AFFILIATE BANNERS
+       These show/hide automatically based on which
+       category the user has selected. Each targets the
+       highest-converting affiliate for that audience.
+       Replace href values with your affiliate URLs.
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- D&D / Fantasy / Sci-Fi / Villain → D&D Beyond affiliate -->
+  <!-- Sign up: dndbeyond.com/marketplace/creators — pays per subscription -->
+  <a class="affiliate-banner affiliate-dnd" id="aff-dnd"
+     href="https://www.dndbeyond.com" target="_blank" rel="noopener sponsored">
+    <span class="affiliate-banner-icon">🎲</span>
+    <div class="affiliate-banner-text">
+      <div class="affiliate-banner-title">Bring your character to life on D&D Beyond</div>
+      <div class="affiliate-banner-sub">Build your character sheet, manage spells, roll dice, and access the full rulebooks digitally.</div>
+    </div>
+    <span class="affiliate-banner-cta">Try free →</span>
+  </a>
+  <p class="affiliate-disclosure affiliate-dnd" id="aff-dnd-disc">* Sponsored link. We may earn a commission at no cost to you.</p>
+
+  <!-- Baby names → Etsy personalised gifts (Amazon Associates also works) -->
+  <!-- Sign up: affiliate-program.amazon.co.uk or etsy.com/uk/affiliates -->
+  <a class="affiliate-banner affiliate-baby" id="aff-baby"
+     href="https://www.etsy.com/uk/search?q=personalised+baby+name+gift" target="_blank" rel="noopener sponsored">
+    <span class="affiliate-banner-icon">🎁</span>
+    <div class="affiliate-banner-text">
+      <div class="affiliate-banner-title">Found the perfect name? Make it a keepsake</div>
+      <div class="affiliate-banner-sub">Personalised name prints, jewellery, and nursery art — hand-made gifts to celebrate your baby's name.</div>
+    </div>
+    <span class="affiliate-banner-cta">Shop gifts →</span>
+  </a>
+  <p class="affiliate-disclosure affiliate-baby" id="aff-baby-disc">* Sponsored link. We may earn a commission at no cost to you.</p>
+
+  <!-- Business names → Namecheap domain check (high-intent, great conversion) -->
+  <!-- Sign up: namecheap.com/affiliates — pays per domain/hosting sale -->
+  <a class="affiliate-banner affiliate-biz" id="aff-biz"
+     href="https://www.namecheap.com" target="_blank" rel="noopener sponsored">
+    <span class="affiliate-banner-icon">🌐</span>
+    <div class="affiliate-banner-text">
+      <div class="affiliate-banner-title">Check if your business name domain is available</div>
+      <div class="affiliate-banner-sub">Search and register your .com, .io or .co.uk domain in minutes — from £6/year.</div>
+    </div>
+    <span class="affiliate-banner-cta">Check domain →</span>
+  </a>
+  <p class="affiliate-disclosure affiliate-biz" id="aff-biz-disc">* Sponsored link. We may earn a commission at no cost to you.</p>
+
+  <!-- All other categories → general Amazon affiliate (books, games, etc.) -->
+  <a class="affiliate-banner affiliate-gen" id="aff-gen"
+     href="https://www.amazon.co.uk" target="_blank" rel="noopener sponsored">
+    <span class="affiliate-banner-icon">📚</span>
+    <div class="affiliate-banner-text">
+      <div class="affiliate-banner-title">Name books, games &amp; accessories on Amazon</div>
+      <div class="affiliate-banner-sub">Baby name guides, pet name books, team building games and more — delivered next day.</div>
+    </div>
+    <span class="affiliate-banner-cta">Shop Amazon →</span>
+  </a>
+  <p class="affiliate-disclosure affiliate-gen" id="aff-gen-disc">* Sponsored link. We may earn a commission at no cost to you.</p>
+
+  <!-- ── Data + Generation Logic ────────────────────────── -->
+  <script>
+  const CATEGORIES = {
+    fantasy: {
+      label: 'Fantasy Character',
+      options: [
+        { id: 'gender', label: 'Gender', choices: ['Any','Feminine','Masculine','Neutral'] },
+        { id: 'race',   label: 'Race',   choices: ['Any','Elf','Dwarf','Human','Halfling','Orc','Fae'] },
+      ],
+      generate(opts) {
+        const elv_f = ['Aelindra','Sylvara','Elowen','Caladwen','Miravel','Thessia','Aerith','Liriel','Naeris','Yvaine','Seraphine','Elara','Thalindra','Vaelris','Eirlys'];
+        const elv_m = ['Arannis','Caladrel','Fenris','Torvald','Aldric','Rhaegos','Theron','Silvanus','Eryndor','Caelum','Vorath','Maelith','Erevan','Zephyros'];
+        const dwa_f = ['Bofria','Hilda','Grundra','Thora','Vigrid','Helga','Keldra','Mirna','Sigrun','Brynja'];
+        const dwa_m = ['Thorin','Balin','Dwalin','Bofur','Gimli','Nori','Dori','Oin','Gloin','Bombur','Fili','Kili','Dolgrin','Brogi'];
+        const hum_f = ['Isolde','Maren','Elara','Sera','Talia','Lyra','Vesper','Celia','Anwen','Brynn','Rowena','Gwen','Aveline','Tamsin'];
+        const hum_m = ['Aldric','Brennan','Caius','Devlin','Edric','Fabian','Gareth','Hadrian','Isidor','Julian','Kiran','Lorcan','Marcus','Nathaniel'];
+        const orc_f = ['Draka','Grasha','Ugra','Maka','Vrak','Skara','Nurka'];
+        const orc_m = ['Grom','Thrall','Drak','Karg','Urzog','Mugrak','Skroll','Grommash','Vorok'];
+        const fae_any = ['Puck','Titania','Oberon','Cobweb','Peaseblossom','Moth','Mustardseed','Silvanus','Briallen','Sorrel','Clover','Wren','Briar','Foxglove','Rue'];
+        const neutral = ['Ash','River','Sky','Storm','Vale','Reed','Frost','Ember','Wisp','Lark','Dusk','Moor','Fern'];
+
+        const g = opts.gender || 'Any';
+        const r = opts.race || 'Any';
+
+        let pool = [];
+        if (r === 'Elf') pool = g === 'Feminine' ? elv_f : g === 'Masculine' ? elv_m : [...elv_f, ...elv_m];
+        else if (r === 'Dwarf') pool = g === 'Feminine' ? dwa_f : g === 'Masculine' ? dwa_m : [...dwa_f, ...dwa_m];
+        else if (r === 'Orc') pool = g === 'Feminine' ? orc_f : g === 'Masculine' ? orc_m : [...orc_f, ...orc_m];
+        else if (r === 'Fae') pool = fae_any;
+        else if (r === 'Halfling') pool = g === 'Neutral' ? neutral : g === 'Feminine' ? hum_f : hum_m;
+        else if (r === 'Human') pool = g === 'Feminine' ? hum_f : g === 'Masculine' ? hum_m : [...hum_f, ...hum_m];
+        else pool = [...elv_f,...elv_m,...hum_f,...hum_m,...fae_any,...neutral];
+
+        if (g === 'Neutral') pool = [...pool, ...neutral];
+        return pick(pool, 12).map(n => ({ name: n, sub: r !== 'Any' ? r : '' }));
+      }
+    },
+
+    dnd: {
+      label: 'D&D / RPG Character',
+      options: [
+        { id: 'class', label: 'Class', choices: ['Any','Fighter','Wizard','Rogue','Paladin','Druid','Ranger','Bard','Warlock','Cleric'] },
+        { id: 'alignment', label: 'Alignment', choices: ['Any','Lawful Good','Chaotic Good','Neutral','Chaotic Evil'] },
+      ],
+      generate(opts) {
+        const fighters = ['Aldric Ironwall','Brennan Steelborn','Kira Bladeheart','Mira Stormshield','Vance Ironfist','Harlan Stoneback','Dagna Warborn','Torvak the Bold'];
+        const wizards = ['Arcandus Veil','Elara Stormweave','Malachar Grey','Thessia Spellwright','Zephyros the Knowing','Caldric Runebind','Nyxara the Pale'];
+        const rogues = ['Shadow Jack','Vesper Nightwhisper','Cade the Quick','Mira Silvershadow','Lothar Lightfinger','Kira Duskblade','Rienne Hollowstep'];
+        const paladins = ['Ser Aldric of Dawn','Blessed Mira','Theron the Just','Ser Elara Goldenshield','Brynn Lightbringer','Daric of the Flame'];
+        const druids = ['Ashwood Fern','Briar Mosswhisper','Elder Sorrel','Oakenhand','Wren Rootsong','Eirne of the Glen','Sylvan Thornwood'];
+        const rangers = ['Kira Swiftbow','Aldric Trailborn','Mira Farwatch','Rynn Deepwood','Thorn Greycloak','Navin Longstride'];
+        const bards = ['Pip the Golden','Lyra Brightstring','Caleb the Wanderer','Mira Songweave','Lorcan Lightfingers','Aelindra Verseborn'];
+        const warlocks = ['Vesper the Bound','Draven Voidpact','Mira Shadowchain','Thyrak the Named','Noctis Greymantle','Elara the Hollow'];
+        const clerics = ['Brother Aldric','Sister Mira of Dawn','Theron the Blessed','Piety Graceborn','Ser Brennan the Healed'];
+
+        const map = { Fighter:fighters,Wizard:wizards,Rogue:rogues,Paladin:paladins,Druid:druids,Ranger:rangers,Bard:bards,Warlock:warlocks,Cleric:clerics };
+        const cls = opts.class || 'Any';
+        let pool = cls === 'Any' ? Object.values(map).flat() : (map[cls] || fighters);
+        return pick(pool, 10).map(n => ({ name: n, sub: cls !== 'Any' ? cls : '' }));
+      }
+    },
+
+    baby: {
+      label: 'Baby Name',
+      options: [
+        { id: 'gender', label: 'Gender', choices: ['Any','Girl','Boy','Unisex'] },
+        { id: 'origin', label: 'Origin', choices: ['Any','English','Celtic','Scandinavian','Latin','Greek','Hebrew','Japanese','Arabic'] },
+      ],
+      generate(opts) {
+        const data = {
+          English: {
+            Girl: [{n:'Evelyn',m:'wished for child'},{n:'Clara',m:'bright, clear'},{n:'Harriet',m:'home ruler'},{n:'Beatrice',m:'she who brings joy'},{n:'Edith',m:'prosperous in war'},{n:'Winifred',m:'blessed peace'},{n:'Florence',m:'flourishing'},{n:'Mabel',m:'lovable'}],
+            Boy:  [{n:'Edmund',m:'fortunate protector'},{n:'Alfred',m:'wise counsel'},{n:'Rupert',m:'bright fame'},{n:'Barnaby',m:'son of consolation'},{n:'Jasper',m:'treasurer'},{n:'Crispin',m:'curly-haired'},{n:'Aubrey',m:'elf ruler'},{n:'Leofric',m:'dear ruler'}],
+            Unisex:[{n:'Robin',m:'bright fame'},{n:'Avery',m:'ruler of elves'},{n:'Morgan',m:'sea circle'},{n:'Bailey',m:'berry clearing'},{n:'Finley',m:'fair warrior'},{n:'Darcy',m:'dark one'},{n:'Drew',m:'strong'}]
+          },
+          Celtic: {
+            Girl: [{n:'Aoife',m:'radiant'},{n:'Saoirse',m:'freedom'},{n:'Niamh',m:'bright'},{n:'Caoimhe',m:'gentle'},{n:'Siobhán',m:'God is gracious'},{n:'Deirdre',m:'one who rages'},{n:'Brigid',m:'exalted one'},{n:'Aine',m:'radiance'}],
+            Boy:  [{n:'Cillian',m:'bright-headed'},{n:'Oisín',m:'little deer'},{n:'Fionn',m:'fair'},{n:'Cormac',m:'charioteer'},{n:'Séamus',m:'supplanter'},{n:'Ruairí',m:'red king'},{n:'Lorcan',m:'fierce'},{n:'Diarmuid',m:'without envy'}],
+            Unisex:[{n:'Cian',m:'ancient'},{n:'Rowan',m:'little red one'},{n:'Ríon',m:'royal'},{n:'Sloane',m:'raider'}]
+          },
+          Scandinavian: {
+            Girl: [{n:'Astrid',m:'divinely beautiful'},{n:'Ingrid',m:'beautiful'},{n:'Freya',m:'noble woman'},{n:'Sigrid',m:'beautiful victory'},{n:'Ragnhild',m:'battle counsel'},{n:'Solveig',m:'strong house'},{n:'Thora',m:'thunder'},{n:'Brynja',m:'armour'}],
+            Boy:  [{n:'Bjorn',m:'bear'},{n:'Leif',m:'heir, descendant'},{n:'Sven',m:'young man'},{n:'Gunnar',m:'bold warrior'},{n:'Ragnar',m:'warrior judgement'},{n:'Ivar',m:'bow warrior'},{n:'Halvard',m:'rock guardian'},{n:'Egil',m:'awe-inspiring'}],
+            Unisex:[{n:'Signe',m:'new victory'},{n:'Dagny',m:'new day'},{n:'Eir',m:'mercy'}]
+          },
+          Latin: {
+            Girl: [{n:'Aurelia',m:'golden'},{n:'Caelia',m:'heaven'},{n:'Valentina',m:'strong, healthy'},{n:'Cecilia',m:'blind'},{n:'Lavinia',m:'purity'},{n:'Cornelia',m:'horn'},{n:'Flavia',m:'golden-haired'},{n:'Livia',m:'blue, envious'}],
+            Boy:  [{n:'Aurelius',m:'golden'},{n:'Cassius',m:'hollow'},{n:'Maximus',m:'greatest'},{n:'Felix',m:'happy'},{n:'Julius',m:'youthful'},{n:'Claudius',m:'lame'},{n:'Cyprian',m:'from Cyprus'},{n:'Atticus',m:'from Attica'}],
+            Unisex:[{n:'Alexis',m:'defender'},{n:'Valerian',m:'strong'}]
+          },
+          Greek: {
+            Girl: [{n:'Callista',m:'most beautiful'},{n:'Thalia',m:'to flourish'},{n:'Persephone',m:'bringer of death'},{n:'Calliope',m:'beautiful voice'},{n:'Penelope',m:'weaver'},{n:'Clio',m:'glory'},{n:'Phoebe',m:'bright'},{n:'Zoe',m:'life'}],
+            Boy:  [{n:'Leander',m:'lion man'},{n:'Orion',m:'rising in the sky'},{n:'Theron',m:'hunter'},{n:'Alexios',m:'defender'},{n:'Demetrios',m:'follower of Demeter'},{n:'Nikos',m:'victory of the people'},{n:'Lysander',m:'liberator'}],
+            Unisex:[{n:'Alex',m:'defender'},{n:'Phoenix',m:'dark red'},{n:'Sasha',m:'defender of men'}]
+          },
+          Hebrew: {
+            Girl: [{n:'Miriam',m:'sea of bitterness'},{n:'Naomi',m:'pleasant'},{n:'Adah',m:'ornament'},{n:'Deborah',m:'bee'},{n:'Esther',m:'star'},{n:'Leah',m:'weary'},{n:'Tamar',m:'palm tree'},{n:'Abigail',m:'father rejoiced'}],
+            Boy:  [{n:'Ezra',m:'help'},{n:'Caleb',m:'faithful'},{n:'Elijah',m:'my God is Yahweh'},{n:'Isaiah',m:'God is salvation'},{n:'Micah',m:'who is like God'},{n:'Asher',m:'happy'},{n:'Gideon',m:'mighty warrior'},{n:'Tobias',m:'God is good'}],
+            Unisex:[{n:'Ariel',m:'lion of God'},{n:'Eden',m:'delight'},{n:'Noam',m:'pleasantness'}]
+          },
+          Japanese: {
+            Girl: [{n:'Sakura',m:'cherry blossom'},{n:'Hana',m:'flower'},{n:'Yuki',m:'snow / happiness'},{n:'Aoi',m:'blue / hollyhock'},{n:'Rin',m:'dignified'},{n:'Sora',m:'sky'},{n:'Noa',m:'love'},{n:'Hinata',m:'towards the sun'}],
+            Boy:  [{n:'Haruki',m:'shining spring'},{n:'Kenji',m:'strong and vigorous'},{n:'Ren',m:'lotus / love'},{n:'Hiroshi',m:'generous'},{n:'Ryuu',m:'dragon'},{n:'Takeshi',m:'fierce warrior'},{n:'Yuto',m:'gentle person'},{n:'Shin',m:'true'}],
+            Unisex:[{n:'Yuki',m:'snow'},{n:'Sora',m:'sky'},{n:'Hiro',m:'generous, prosperous'}]
+          },
+          Arabic: {
+            Girl: [{n:'Layla',m:'night'},{n:'Zara',m:'blooming flower'},{n:'Nadia',m:'hope'},{n:'Aisha',m:'alive'},{n:'Fatima',m:'to abstain'},{n:'Yasmin',m:'jasmine'},{n:'Hana',m:'happiness'},{n:'Rania',m:'gazing'}],
+            Boy:  [{n:'Amir',m:'prince'},{n:'Khalid',m:'eternal'},{n:'Omar',m:'flourishing'},{n:'Tariq',m:'morning star'},{n:'Zaid',m:'growth'},{n:'Idris',m:'studious'},{n:'Sami',m:'elevated'},{n:'Rayan',m:'gates of heaven'}],
+            Unisex:[{n:'Nour',m:'light'},{n:'Sami',m:'elevated'},{n:'Rayan',m:'gates of heaven'}]
+          }
+        };
+
+        const g = opts.gender || 'Any';
+        const o = opts.origin || 'Any';
+        const gKey = g === 'Girl' ? 'Girl' : g === 'Boy' ? 'Boy' : 'Unisex';
+
+        let pool = [];
+        const origins = o === 'Any' ? Object.keys(data) : [o];
+        for (const orig of origins) {
+          if (!data[orig]) continue;
+          if (g === 'Any') pool = [...pool, ...(data[orig].Girl||[]), ...(data[orig].Boy||[]), ...(data[orig].Unisex||[])];
+          else pool = [...pool, ...(data[orig][gKey]||[])];
+        }
+        if (!pool.length) pool = Object.values(data).flatMap(d => Object.values(d).flat());
+        return pick(pool, 12).map(p => ({ name: p.n, sub: p.m }));
+      }
+    },
+
+    business: {
+      label: 'Business / Brand Name',
+      options: [
+        { id: 'style', label: 'Style', choices: ['Any','Modern & clean','Creative & playful','Professional','Tech-forward','Nature-inspired'] },
+        { id: 'length', label: 'Length', choices: ['Any','Short (1–2 syllables)','Medium (3–4 syllables)','Long'] },
+      ],
+      generate(opts) {
+        const modern = ['Velo','Nuvola','Sola','Arca','Nuvo','Pivit','Claro','Zenra','Aprio','Vanta','Curo','Lumo','Apto','Flowi','Plex'];
+        const creative = ['Wobble','Springo','Zesty','Pebble & Co','Fizzly','Snappy','Boingo','Whumph','Quibble','Flotsam','Sprout & Bloom','The Noodle Lab'];
+        const professional = ['Aldrich & Sons','Vance Meridian','Thornfield Group','Cavendish Partners','Blackwood Advisory','Whitmore & Grey','Harrington Co'];
+        const tech = ['Nexara','Synvix','Datrom','Kryplex','Airvio','Versal','Quantex','Cloudrift','Pivex','Omnify','Taskr','Stackly','Devhive'];
+        const nature = ['Thornwood','Mosscroft','Riverstone','Greenveil','Clearwater','Oakwell','Bramblewood','Cedarpeak','Misty Hollow','Wildroot'];
+
+        const s = opts.style || 'Any';
+        const map = { 'Modern & clean':modern,'Creative & playful':creative,'Professional':professional,'Tech-forward':tech,'Nature-inspired':nature };
+        let pool = s === 'Any' ? [...modern,...creative,...professional,...tech,...nature] : (map[s] || modern);
+        return pick(pool, 10).map(n => ({ name: n, sub: '' }));
+      }
+    },
+
+    team: {
+      label: 'Team Name',
+      options: [
+        { id: 'sport', label: 'Type', choices: ['Any','Football','Gaming','Quiz','Corporate','Running','Creative'] },
+        { id: 'tone',  label: 'Tone', choices: ['Any','Fierce','Funny','Clever','Mysterious'] },
+      ],
+      generate(opts) {
+        const fierce = ['Iron Wolves','Thunder Hawks','Crimson Tide','Dark Vanguard','Storm Breakers','Shadow Strike','Apex Predators','War Eagles','Bone Crushers','The Furious'];
+        const funny = ['The Designated Drivers','404 Team Not Found','Average Joes','The Ctrl+Alt+Defeat','Cereal Killers','Ageing Disgracefully','One Direction (Downhill)','We Thought There Was a Lift','Below Average','Just Here for the Snacks'];
+        const clever = ['Quantum Leap','The Algorithms','Lateral Thinkers','Occam\'s Laser','The Control Group','Null Hypothesis','Schrodinger\'s Cats','The Variables','The Prime Movers','Cognitive Surplus'];
+        const mysterious = ['The Unnamed','Void Walkers','Echoes','The Unseen','Zero Sum','The Quiet Ones','Midnight Protocol','The Cipher'];
+
+        const t = opts.tone || 'Any';
+        const map = { Fierce:fierce,Funny:funny,Clever:clever,Mysterious:mysterious };
+        let pool = t === 'Any' ? [...fierce,...funny,...clever,...mysterious] : (map[t] || fierce);
+        return pick(pool, 10).map(n => ({ name: n, sub: '' }));
+      }
+    },
+
+    pet: {
+      label: 'Pet Name',
+      options: [
+        { id: 'animal', label: 'Animal', choices: ['Any','Dog','Cat','Rabbit','Bird','Hamster','Fish'] },
+        { id: 'vibe',   label: 'Vibe',   choices: ['Any','Cute','Regal','Funny','Mythical'] },
+      ],
+      generate(opts) {
+        const cute = ['Biscuit','Mochi','Pudding','Butterscotch','Waffle','Noodle','Dumpling','Pebble','Sprout','Tofu','Tater','Cobbler','Smore','Jellybean','Marshmallow'];
+        const regal = ['Duchess','Baron','Countess','Lord Fluffington','Emperor','Regent','Majesty','Archduke','Sovereign','Baroness','Viscountess','Sir Reginald'];
+        const funny = ['Professor Whiskers','Sir Flops-a-lot','Bark Twain','Purr-sephone','Hairy Potter','Sherlock Bones','Meowcolm X','Pawdrey Hepburn','Catrick Swayze','William Shakespaw'];
+        const mythical = ['Apollo','Athena','Odin','Loki','Freya','Thor','Hermes','Artemis','Fenrir','Valkyrie','Merlin','Excalibur','Draco','Circe'];
+
+        const v = opts.vibe || 'Any';
+        const map = { Cute:cute,Regal:regal,Funny:funny,Mythical:mythical };
+        let pool = v === 'Any' ? [...cute,...regal,...funny,...mythical] : (map[v] || cute);
+        return pick(pool, 12).map(n => ({ name: n, sub: '' }));
+      }
+    },
+
+    scifi: {
+      label: 'Sci-Fi Character',
+      options: [
+        { id: 'species', label: 'Species', choices: ['Any','Human','Android','Alien','Hybrid'] },
+        { id: 'role',    label: 'Role',    choices: ['Any','Captain','Engineer','Medic','Pilot','Hacker','Soldier'] },
+      ],
+      generate(opts) {
+        const human = ['Kaiden Voss','Lyra Helion','Tessa Crane','Marco Solaris','Dex Halo','Zara Nox','Orion Black','Petra Nova','Callum Rift','Vera Comet'];
+        const android = ['Unit 7-Theta','AXIOM-3','Cipher-9','NOVA Unit','SYLPH-2','Proto-7','Ghost Protocol','Kernel Prime','NX-12','Data-5 Elara'];
+        const alien = ['Vrex\'lar','Sh\'kara','Thal-Dun','Ix\'Varos','Nerethis','Uu\'naxa','Krix Vael','Jor\'dak','Thessivore','Lum\'kai'];
+        const hybrid = ['Half-Light Kane','Mira Dual-Born','The Splice','Hybrid Petra','Chimera Dex','Echo Mesh','Fuse Model Lyra'];
+
+        const s = opts.species || 'Any';
+        const map = { Human:human,Android:android,Alien:alien,Hybrid:hybrid };
+        let pool = s === 'Any' ? [...human,...android,...alien,...hybrid] : (map[s] || human);
+        return pick(pool, 10).map(n => ({ name: n, sub: opts.role && opts.role !== 'Any' ? opts.role : '' }));
+      }
+    },
+
+    villain: {
+      label: 'Villain / Dark Character',
+      options: [
+        { id: 'archetype', label: 'Archetype', choices: ['Any','Dark Lord','Mastermind','Fallen Hero','Monster','Trickster'] },
+      ],
+      generate(opts) {
+        const darkLord = ['Malachar the Undying','Lord Varek','Dread Sovereign Nox','The Ashen King','Umbra','The Hollow Emperor','Vael the Ruinbringer','Darkseer Krath'];
+        const mastermind = ['The Architect','Ebon Grey','Silvertongue','The Puppeteer','Caelius Vane','Control','The Weaver','Director Shadow','The Broker'];
+        const fallen = ['Aldric the Oathbroken','Once-Bright Kira','The Betrayer','Fallen Marshal Dace','Galen the Lost','Seraphim Unbound','Broken Paladin Rynn'];
+        const monster = ['The Hollow','Grim','The Flayed','Maw','The Unsleeping','Bone-Caller','The Ravenous','Shriek','Dusk Horror','The Endless Hunger'];
+        const trickster = ['Foxglove','The Riddler\'s Heir','Loki\'s Laughter','Quicksilver Vance','Puck the Malicious','Grin','The Jesting Dark'];
+
+        const a = opts.archetype || 'Any';
+        const map = { 'Dark Lord':darkLord,'Mastermind':mastermind,'Fallen Hero':fallen,'Monster':monster,'Trickster':trickster };
+        let pool = a === 'Any' ? [...darkLord,...mastermind,...fallen,...monster,...trickster] : (map[a] || darkLord);
+        return pick(pool, 10).map(n => ({ name: n, sub: a !== 'Any' ? a : '' }));
+      }
+    }
+  };
+
+  // Utilities
+  function pick(arr, n) {
+    const shuffled = [...arr].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, Math.min(n, shuffled.length));
+  }
+
+  let currentCat = 'fantasy';
+  let favourites = [];
+
+  function buildOptions(cat) {
+    const opts = CATEGORIES[cat].options;
+    const container = document.getElementById('gen-options');
+    container.innerHTML = opts.map(o => `
+      <div class="option-group">
+        <span class="option-label">${o.label}</span>
+        <select id="opt-${o.id}">
+          ${o.choices.map(c => `<option value="${c}">${c}</option>`).join('')}
+        </select>
+      </div>
+    `).join('');
+  }
+
+  function getOpts() {
+    const opts = {};
+    document.querySelectorAll('#gen-options select').forEach(s => {
+      opts[s.id.replace('opt-','')] = s.value;
+    });
+    return opts;
+  }
+
+  function generate() {
+    const icon = document.getElementById('gen-icon');
+    icon.classList.add('spinning');
+    setTimeout(() => icon.classList.remove('spinning'), 400);
+
+    const opts = getOpts();
+    const results = CATEGORIES[currentCat].generate(opts);
+    const grid = document.getElementById('results-grid');
+    grid.innerHTML = '';
+
+    results.forEach((r, i) => {
+      const tile = document.createElement('div');
+      tile.className = 'name-tile';
+      tile.style.animationDelay = (i * 0.04) + 's';
+      tile.innerHTML = `
+        <div class="tile-name">${r.name}</div>
+        ${r.sub ? `<div class="tile-meaning">${r.sub}</div>` : ''}
+        <div class="tile-copy-hint">click to save · double-click to copy</div>
+      `;
+      tile.addEventListener('click', () => saveFavourite(r.name, tile));
+      tile.addEventListener('dblclick', () => copyName(r.name, tile));
+      grid.appendChild(tile);
+    });
+
+    document.getElementById('count-display').textContent = `${results.length} names generated`;
+  }
+
+  function saveFavourite(name, tile) {
+    if (favourites.includes(name)) return;
+    favourites.push(name);
+    tile.classList.add('copied');
+    setTimeout(() => tile.classList.remove('copied'), 800);
+    renderFavourites();
+  }
+
+  function renderFavourites() {
+    const bar = document.getElementById('fav-bar');
+    const empty = document.getElementById('fav-empty');
+    // Remove old chips
+    bar.querySelectorAll('.fav-chip').forEach(c => c.remove());
+    if (favourites.length === 0) {
+      empty.style.display = '';
+      return;
+    }
+    empty.style.display = 'none';
+    favourites.forEach(name => {
+      const chip = document.createElement('span');
+      chip.className = 'fav-chip';
+      chip.textContent = name;
+      chip.title = 'Click to remove';
+      chip.onclick = () => {
+        favourites = favourites.filter(n => n !== name);
+        renderFavourites();
+      };
+      bar.appendChild(chip);
+    });
+  }
+
+  function copyName(name, tile) {
+    navigator.clipboard.writeText(name).then(() => {
+      tile.classList.add('copied');
+      setTimeout(() => tile.classList.remove('copied'), 1000);
+    });
+  }
+
+  function copyAll() {
+    const names = [...document.querySelectorAll('.tile-name')].map(t => t.textContent);
+    navigator.clipboard.writeText(names.join('\n'));
+  }
+
+  // Category switching
+  document.getElementById('cat-row').addEventListener('click', e => {
+    const btn = e.target.closest('.cat-btn');
+    if (!btn) return;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    buildOptions(currentCat);
+    generate();
+    updateAffiliates(currentCat);
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // AFFILIATE SWITCHER — shows contextually relevant banner
+  // based on active category. Best conversion rates come
+  // from matching the affiliate to the user's intent.
+  // ═══════════════════════════════════════════════════════
+  function updateAffiliates(cat) {
+    // Hide all
+    document.querySelectorAll('.affiliate-dnd, .affiliate-baby, .affiliate-biz, .affiliate-gen')
+      .forEach(el => el.style.display = 'none');
+
+    // Show relevant one
+    if (['dnd','fantasy','scifi','villain'].includes(cat)) {
+      document.querySelectorAll('.affiliate-dnd').forEach(el => el.style.display = 'flex');
+      document.getElementById('aff-dnd-disc').style.display = 'block';
+    } else if (cat === 'baby') {
+      document.querySelectorAll('.affiliate-baby').forEach(el => el.style.display = 'flex');
+      document.getElementById('aff-baby-disc').style.display = 'block';
+    } else if (cat === 'business') {
+      document.querySelectorAll('.affiliate-biz').forEach(el => el.style.display = 'flex');
+      document.getElementById('aff-biz-disc').style.display = 'block';
+    } else {
+      document.querySelectorAll('.affiliate-gen').forEach(el => el.style.display = 'flex');
+      document.getElementById('aff-gen-disc').style.display = 'block';
+    }
+  }
+
+  // Init
+  buildOptions(currentCat);
+  generate();
+  updateAffiliates(currentCat);
+  </script>
+
+  <!-- ═══════════════════════════════════════════════
+       AD SLOT 2 — Mid-content in-article unit
+       ═══════════════════════════════════════════════ -->
+  <div class="ad-incontent" style="margin:40px 0 0;">
+    Ad unit 2 — In-article / native unit<br>
+    Replace with: &lt;ins class="adsbygoogle" data-ad-format="fluid"...&gt;
+  </div>
+
+  <!-- SEO content -->
+  <section class="seo-section">
+    <h2>About this name generator</h2>
+    <div class="seo-grid">
+      <div>
+        <h3>Fantasy &amp; D&amp;D names</h3>
+        <p>Our fantasy name generator draws on naming conventions from high fantasy literature and tabletop RPG traditions. Elven names are designed to feel melodic and ancient, dwarven names carry their characteristic strength and brevity, and fae names reflect the liminal, natural quality of that tradition.</p>
+        <p>D&D players will find class-specific name suggestions — a Wizard's name has different phonetic qualities than a Fighter's. Tone and archetype are baked in to help you find a name that fits your character concept, not just the setting.</p>
+      </div>
+      <div>
+        <h3>Baby names by origin</h3>
+        <p>Each baby name in our database includes its meaning — because the most memorable names carry a story. We cover Celtic, Scandinavian, Latin, Greek, Hebrew, Japanese and Arabic origins, reflecting the rich diversity of naming traditions parents draw on today.</p>
+        <p>Unlike baby name lists that surface the same hundred popular names, we've curated options that are distinctive without being invented. Classic but not overused.</p>
+        <h3>Business &amp; brand names</h3>
+        <p>A good business name is short, distinctive, and available. Our business name generator offers five distinct style registers — from clean modern coinages like "Velo" and "Nuvola" to professional partnership-style names. Use these as inspiration, then check domain availability for your favourites.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 48px;">
+      <h2 style="margin-bottom: 20px;">Frequently asked questions</h2>
+      <details>
+        <summary>Can I use these names commercially?</summary>
+        <p class="faq-a">Yes. All names generated by this tool are free to use for any purpose — personal projects, published fiction, games, business names, and more. Names themselves are not subject to copyright. If a generated name happens to match an existing trademark, check clearance before commercial use.</p>
+      </details>
+      <details>
+        <summary>How are the names generated?</summary>
+        <p class="faq-a">Names are drawn from hand-curated lists built around each category's conventions — phonetic patterns for fantasy races, etymological research for baby names, branding principles for business names. The randomisation happens entirely in your browser; no names are sent to or stored on any server.</p>
+      </details>
+      <details>
+        <summary>Can I suggest names to add?</summary>
+        <p class="faq-a">Yes — use the contact link in the footer. We regularly update each category's name pool based on feedback, particularly for underrepresented cultural origins in the baby names section.</p>
+      </details>
+      <details>
+        <summary>How many names can I generate?</summary>
+        <p class="faq-a">Unlimited. Click Generate as many times as you like. Each click draws fresh random selections from the curated pool for your chosen category and filters.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-brand">NameForge.io</span>
+    <nav style="display:flex;gap:16px;">
+      <a href="#" style="color:var(--text-3);text-decoration:none">About</a>
+      <a href="#" style="color:var(--text-3);text-decoration:none">Privacy</a>
+      <a href="#" style="color:var(--text-3);text-decoration:none">Contact</a>
+    </nav>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       AD SLOT 3 — Pre-footer leaderboard
+       ═══════════════════════════════════════════════ -->
+  <div class="ad-incontent" style="margin-top:24px;">
+    Ad unit 3 — Leaderboard / footer banner<br>
+    Replace with: &lt;ins class="adsbygoogle" data-ad-format="auto"...&gt;
+  </div>
+
+</div>
+
+<!-- STICKY ANCHOR AD ══════════════════════════════════════
+     AdSense: Ads → By ad unit → Display ads → Anchor/overlay
+     ═════════════════════════════════════════════════════ -->
+<div class="sticky-anchor" id="sticky-anchor">
+  <span class="sticky-anchor-label">Ad</span>
+  <div style="width:320px;height:50px;background:var(--bg-3);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:0.06em;">
+    Sticky anchor ad — 320×50 mobile banner
+  </div>
+  <button class="sticky-anchor-close" onclick="dismissAnchor()" aria-label="Close ad">✕</button>
+</div>
+
+<script>
+function dismissAnchor() {
+  document.getElementById('sticky-anchor').style.display = 'none';
+  document.body.classList.remove('anchor-visible');
+}
+document.body.classList.add('anchor-visible');
+</script>
+</html>
